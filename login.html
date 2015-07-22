@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+       
+    </head>
+    <body ng-app="crossModule" ng-controller="crossCtrl">         
+        <div id="login">    
+            <a href="#homepage/sesion1">Moby</a>
+            <div id="talking-user">                
+                <div id="usericon"><center><img src="img/user.png" alt="user icon"/></center></div>
+            </div>
+            <form>
+              <input class="input" type="text" placeholder="Username" ng-model="user"/>
+              <input class="input" type="password" placeholder="Password" ng-model="pass"/>
+              <input type="submit" value="Log in" ng-click="login()"/>
+            </form>
+        </div>        
+    </body>
+</html>

@@ -9,8 +9,21 @@ and open the template in the editor.
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="css/homepage.css" rel="stylesheet" type="text/css"/>
     </head>
-    <body>
-        <div>TODO write content</div>
+    <body ng-app="crossModule" ng-controller="homeCtrl">                
+         <div class="" id="line-chart" style="width: 500px">
+          <div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <div class="chart-container">
+                    <canvas id="line" class="chart chart-line" data="data"
+                        labels="labels" legend="true" series="series"
+                        click="onClick">
+                      </canvas> 
+                </div>
+            </div>
+          </div>
+        </div>
     </body>
 </html>
