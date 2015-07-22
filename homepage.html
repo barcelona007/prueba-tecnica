@@ -12,15 +12,45 @@ and open the template in the editor.
         <link href="css/homepage.css" rel="stylesheet" type="text/css"/>
     </head>
     <body ng-app="crossModule" ng-controller="homeCtrl">                
-         <div class="" id="line-chart" style="width: 500px">
+         <div class="" id="line-chart" style="width: 500px" ng-controller="totalsales">
           <div class="panel panel-default">
             <div class="panel-heading">Line Chart</div>
             <div class="panel-body">
                 <div class="chart-container">
-                    <canvas id="line" class="chart chart-line" data="data"
-                        labels="labels" legend="true" series="series"
-                        click="onClick">
-                      </canvas> 
+                    <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas> 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="" id="line-chart" style="width: 500px" ng-controller="salesmonth">
+          <div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <div class="chart-container">
+                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="" id="line-chart" style="width: 500px" ng-controller="toporder">
+          <div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <div class="chart-container">
+                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
+                </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="" id="line-chart" style="width: 500px" ng-controller="topsale">
+          <div class="panel panel-default">
+            <div class="panel-heading">Line Chart</div>
+            <div class="panel-body">
+                <div class="chart-container">
+                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
                 </div>
             </div>
           </div>

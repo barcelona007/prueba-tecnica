@@ -16,6 +16,10 @@ crossModule.config(['$routeProvider',
     });
 }]);
 
+crossModule.service("shareService",function(){
+  this.session_id="";  
+});
+
 crossModule.controller("indexCtrl",function($scope){
       
 });
@@ -38,16 +42,47 @@ crossModule.controller("crossCtrl",function($scope,$http){
 });
 
 
-crossModule.controller("homeCtrl",function($scope,$http,$routeParams){
-     $scope.session_id = $routeParams.sessionid;
-     
-    $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+crossModule.controller("homeCtrl",function($scope,$http,$routeParams,shareService){
+     $scope.session_id = $routeParams.sessionid;       
+     shareService.session_id=$scope.session_id;    
+});
+
+crossModule.controller("totalsales",function($scope,shareService){
+    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
+    $scope.series = ['Series A', 'Series B'];
+
+    $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
+});
+
+crossModule.controller("salesmonth",function($scope,shareService){
+   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
     $scope.series = ['Series A', 'Series B'];
     $scope.data = [
       [65, 59, 80, 81, 56, 55, 40],
       [28, 48, 40, 19, 86, 27, 90]
     ];
-    $scope.onClick = function (points, evt) {
-      console.log(points, evt);
-    };
 });
+
+crossModule.controller("toporder",function($scope,shareService){
+   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A', 'Series B'];
+    $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
+});
+
+
+crossModule.controller("topsale",function($scope,shareService){
+   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
+    $scope.series = ['Series A', 'Series B'];
+    $scope.data = [
+      [65, 59, 80, 81, 56, 55, 40],
+      [28, 48, 40, 19, 86, 27, 90]
+    ];
+});
+
+
