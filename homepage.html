@@ -8,52 +8,62 @@ and open the template in the editor.
     <head>
         <title>TODO supply a title</title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link href="css/homepage.css" rel="stylesheet" type="text/css"/>
-    </head>
-    <body ng-app="crossModule" ng-controller="homeCtrl">                
-         <div class="" id="line-chart" style="width: 500px" ng-controller="totalsales">
-          <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
-            <div class="panel-body">
-                <div class="chart-container">
-                    <canvas id="line" class="chart chart-line" data="data" labels="labels" legend="true" series="series" click="onClick"></canvas> 
-                </div>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+    </head>    
+    <body ng-app="crossModule" ng-controller="homeCtrl">   
+        <script>
+            $(function() {
+              $( ".ui-widget-content" ).draggable()
+              $( ".ui-widget-content" ).resizable();
+            });
+        </script>
+        <div class="row">
+           <div class="col-xs-5 ui-widget-content" id="totalsales" style="width: 500px" ng-controller="totalsales">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#totalsales/{{session_id}}">Sales Total Per Sales Man</a> <span onclick="$(this).parent().parent().hide()" style="float:right">X</span></div>
+              <div class="panel-body">
+                  <div class="chart-container">
+                      <canvas id="pie" class="chart chart-pie" data="data" labels="labels"></canvas>
+                  </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-xs-2"></div>
+          <div class="col-xs-5 ui-widget-content" id="totalsales" style="width: 500px" ng-controller="salesmonth" >
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#salesmonth/{{session_id}}">Total Sales Per Month</a><span onclick="$(this).parent().parent().hide()" style="float:right">X</span></div>
+              <div class="panel-body">
+                  <div class="chart-container">
+                      <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+         
+        <div class="row">
+            <div class="col-xs-5 ui-widget-content" id="line-chart" style="width: 500px" ng-controller="toporder">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#toporder/{{session_id}}">Top 5 Sales Orders</a><span onclick="$(this).parent().parent().hide()" style="float:right">X</span></div>
+              <div class="panel-body">
+                  <div class="chart-container">
+                      <div id="grid1" ui-grid="{ data: myData }" class="grid"></div>
+                  </div>
+              </div>
+            </div>
+          </div>
+        <div class="col-xs-2"></div>
+          <div class="col-xs-5 ui-widget-content" id="line-chart" style="width: 500px" ng-controller="topsale">
+            <div class="panel panel-default">
+                <div class="panel-heading"><a href="#topsale/{{session_id}}">Top 5 Sales Men</a><span onclick="$(this).parent().parent().hide()" style="float:right">X</span></div>
+              <div class="panel-body">
+                  <div class="chart-container">
+                      <div id="grid1" ui-grid="{ data: topsalesmen }" class="grid"></div>
+                  </div>
+              </div>
             </div>
           </div>
         </div>
         
-        <div class="" id="line-chart" style="width: 500px" ng-controller="salesmonth">
-          <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
-            <div class="panel-body">
-                <div class="chart-container">
-                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
-                </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="" id="line-chart" style="width: 500px" ng-controller="toporder">
-          <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
-            <div class="panel-body">
-                <div class="chart-container">
-                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
-                </div>
-            </div>
-          </div>
-        </div>
-        
-        <div class="" id="line-chart" style="width: 500px" ng-controller="topsale">
-          <div class="panel panel-default">
-            <div class="panel-heading">Line Chart</div>
-            <div class="panel-body">
-                <div class="chart-container">
-                    <canvas id="bar" class="chart chart-bar" data="data"  labels="labels"></canvas> 
-                </div>
-            </div>
-          </div>
-        </div>
     </body>
 </html>

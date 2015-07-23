@@ -49,3 +49,8 @@ input[type="submit"]{
 input[type="submit"]:hover{
   background:#B24736;
 }
+
+.myGrid {
+    width: 500px;
+    height: 250px;
+  }

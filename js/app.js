@@ -1,4 +1,4 @@
-var crossModule=angular.module("crossModule",['ngRoute','chart.js']);
+var crossModule=angular.module("crossModule",['ngRoute','chart.js','ui.grid']);
 
 crossModule.config(['$routeProvider',
   function($routeProvider) {
@@ -10,6 +10,22 @@ crossModule.config(['$routeProvider',
     when('/login', {
         templateUrl: 'login.html',
         controller: 'crossCtrl'
+    }).
+    when('/totalsales/:sessionid', {
+        templateUrl: 'totalsales.html',
+        controller: 'totalsales'
+    }).
+    when('/salesmonth/:sessionid', {
+        templateUrl: 'salesmonth.html',
+        controller: 'salesmonth'
+    }).
+    when('/toporder/:sessionid', {
+        templateUrl: 'toporder.html',
+        controller: 'toporder'
+    }).
+    when('/topsale/:sessionid', {
+        templateUrl: 'topsale.html',
+        controller: 'topsale'
     }).
     otherwise({
         redirectTo: '/login'
@@ -47,42 +63,82 @@ crossModule.controller("homeCtrl",function($scope,$http,$routeParams,shareServic
      shareService.session_id=$scope.session_id;    
 });
 
-crossModule.controller("totalsales",function($scope,shareService){
-    $scope.labels = ['2006', '2007', '2008', '2009', '2010', '2011', '2012'];
-    $scope.series = ['Series A', 'Series B'];
-
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+crossModule.controller("totalsales",function($scope,$http,$routeParams,shareService){
+    $scope.session_id = $routeParams.sessionid;       
+     shareService.session_id=$scope.session_id;  
+    $scope.salesmandata=function(){
+         return $http.get("http://localhost:8080/salesmandata?sessionid="+shareService.session_id)
+          .success(function(data){
+              if(data.resultDescription==="SUCCESS"){                    
+                  var salesman=[],quantity=[];
+                  angular.forEach(data.data, function(value, key) {
+                      salesman.push(value[0]);
+                      quantity.push(value[1]);
+                  }); 
+                     $scope.labels = salesman;
+                     $scope.data = quantity;                       
+                }
+          });
+      };
+      $scope.salesmandata();
 });
 
-crossModule.controller("salesmonth",function($scope,shareService){
-   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+crossModule.controller("salesmonth",function($scope,$http,$routeParams,shareService){
+    $scope.session_id = $routeParams.sessionid;       
+     shareService.session_id=$scope.session_id; 
+    $scope.lastyeardata=function(){
+         return $http.get("http://localhost:8080/lastyeardata?sessionid="+shareService.session_id)
+          .success(function(data){
+              var month=[],quantity=[];
+                  angular.forEach(data.data, function(value, key) {                      
+                      month.push(value[0]);
+                      quantity.push(value[1]);
+                  }); 
+              if(data.resultDescription==="SUCCESS"){                   
+                    $scope.labels = month;
+                    $scope.series = ['Months'];
+
+                    $scope.data = [
+                      quantity                    
+                    ];     
+                }
+          });
+      };   
+      $scope.lastyeardata();
 });
 
-crossModule.controller("toporder",function($scope,shareService){
-   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+crossModule.controller("toporder",function($scope,$http,$routeParams,shareService){
+    $scope.session_id = $routeParams.sessionid;       
+     shareService.session_id=$scope.session_id; 
+  $scope.toporder=function(){
+         return $http.get("http://localhost:8080/topsalesorders?sessionid="+shareService.session_id)
+          .success(function(data){              
+              if(data.resultDescription==="SUCCESS"){                   
+                    $scope.myData=data.data;
+               }
+          });
+      };   
+      $scope.toporder();
 });
 
 
-crossModule.controller("topsale",function($scope,shareService){
-   $scope.labels = ["January", "February", "March", "April", "May", "June", "July"];
-    $scope.series = ['Series A', 'Series B'];
-    $scope.data = [
-      [65, 59, 80, 81, 56, 55, 40],
-      [28, 48, 40, 19, 86, 27, 90]
-    ];
+crossModule.controller("topsale",function($scope,$http,shareService){
+   $scope.topsale=function(){
+         return $http.get("http://localhost:8080/topsalesmen?sessionid="+shareService.session_id)
+          .success(function(data){
+              var rows=[];
+                  angular.forEach(data.data, function(value, key) {                      
+                      var aux={};
+                      aux.name=value[0];
+                      aux.quantity=value[1];   
+                      rows.push(aux);
+                  }); 
+              if(data.resultDescription==="SUCCESS"){                   
+                    $scope.topsalesmen=rows;
+               }
+          });
+      };   
+      $scope.topsale();
 });
 
 
